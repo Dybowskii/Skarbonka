@@ -56,7 +56,7 @@ MIDDLEWARE = [
 REST_FRAMEWORK  = {'DEFAULT_PERMISSION_CLASSES': [   'rest_framework.permissions.AllowAny' ]}
 
 ROOT_URLCONF = 'back.urls'
-ORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
     {
