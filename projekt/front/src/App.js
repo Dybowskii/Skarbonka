@@ -1,16 +1,54 @@
-import React from "react";
-import axios, * as others from 'axios';
+import "./App.css";
+import React, { useState } from "react";
+import Navbar from "./Components/Navbar";
+import Header from "./Components/Header";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
 
-axios.get('http://127.0.0.1:8000/wel/')
-  .then(function (response) {
-    console.log(response);
-  })
+function NavigationBar(props) {
+  const isLoggedIn = props.isLoggedIn;
+  const isLoginVisible = props.isLoginVisible;
 
-
-function App() {
+  if (isLoggedIn) {
+    return (
+      <div>
+        <Header header="Logowanie" />
+        {isLoginVisible && <Login />}
+      </div>
+    );
+  }
   return (
     <div>
-      hej
+      <Header header="Rejestracja" />
+      {!isLoginVisible && <Register />}
+    </div>
+  );
+}
+
+function App() {
+  const [isClicked, setIsClicked] = useState(true);
+  const [isLoginVisible, setIsLoginVisible] = useState(true);
+
+  const handleLoginClick = () => {
+    setIsClicked(true);
+    setIsLoginVisible(true);
+  };
+
+  const handleRegisterClick = () => {
+    setIsClicked(false);
+    setIsLoginVisible(false);
+  };
+
+  return (
+    <div className="container">
+      <div className="content">
+        <Navbar
+          handleLoginClick={handleLoginClick}
+          handleRegisterClick={handleRegisterClick}
+          isLoggedIn={isClicked}
+        />
+        <NavigationBar isLoggedIn={isClicked} isLoginVisible={isLoginVisible} />
+      </div>
     </div>
   );
 }
