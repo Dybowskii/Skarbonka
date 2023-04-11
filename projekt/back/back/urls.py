@@ -15,11 +15,11 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include,re_path
+from django.urls import path, include
 
 from skarbonka.views import *
   
 urlpatterns = [
-    re_path('admin/', admin.site.urls),
-    re_path('wel/', ChildView.as_view(), name="something"),
+    path('admin/', admin.site.urls),
+    path('api/',include('skarbonka.urls'))
 ]
