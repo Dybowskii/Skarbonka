@@ -1,0 +1,13 @@
+.amountTitle, .amount{
+    font-size: 40px;
+    font-weight: 100;
+    margin: 0;
+}
+.amount
+{
+    font-weight: bold;
+}
+.buttons
+{
+    text-align: center;
+}

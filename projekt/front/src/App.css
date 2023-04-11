@@ -1,8 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap");
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #0184d0 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #0184d0;
+    border-radius: 8px;
+    border: 4px solid #ffffff;
+  }
+html * {
+  font-family: Montserrat;
+}
 body {
   background-color: #0093e9;
   background-image: linear-gradient(0deg, #0093e9 0%, #00ffd2 100%);
-
   margin: 0;
   padding: 0;
 }
@@ -25,7 +48,6 @@ body {
 .login-content {
   color: rgb(255, 255, 255);
   position: relative;
-  font-family: Montserrat;
   border: none;
   background: none;
   font-size: 220%; /* 100% -> 16px, lepiej czcionka w procentach sie skaluje :D*/
@@ -58,7 +80,6 @@ body {
 }
 .register-content {
   position: relative;
-  font-family: Montserrat;
   border: none;
   background: none;
   color: white;
@@ -93,14 +114,12 @@ body {
 }
 .header-container {
   text-align: center;
-  font-family: Montserrat;
   margin: 5% 0 0 0;
   font-size: 500%;
   letter-spacing: 1px;
 }
 label {
   font-size: 200%;
-  font-family: Montserrat;
   font-weight: bold;
   margin: 3% 0 2% 0;
 }
@@ -123,7 +142,6 @@ input[type="text"] {
   text-align: center;
   padding: 20px 20px;
   margin: 0 auto;
-  font-family: Montserrat;
   font-size: 120%;
   transition: 0.6s;
 }
@@ -141,7 +159,6 @@ input[type="password"] {
   text-align: center;
   padding: 20px 20px;
   margin: 0 auto;
-  font-family: Montserrat;
   font-size: 120%;
   transition: 0.6s;
 }
@@ -159,7 +176,6 @@ input[type="password"]:hover {
   text-align: center;
   padding: 20px 20px;
   margin: 6% 0 2% 38%;
-  font-family: Montserrat;
   font-size: 150%;
   font-weight: bold;
   transition: 0.6s;
@@ -173,7 +189,6 @@ input[type="password"]:hover {
   width: 15%;
   margin: 0 auto;
   font-size: 100%;
-  font-family: Montserrat;
   font-weight: 300;
   background: none;
   border: none;
@@ -196,7 +211,6 @@ input[type="password"]:hover {
   text-align: center;
   padding: 20px 20px;
   margin: 5% 0 2% 38%;
-  font-family: Montserrat;
   font-size: 150%;
   font-weight: bold;
   transition: 0.6s;
@@ -205,4 +219,233 @@ input[type="password"]:hover {
   background-color: #24baff;
   transition: 0.6s;
   cursor: pointer;
+}
+.nav {
+  margin: 0 0 10% 0;
+}
+.Card {
+  background-color: #0093e9;
+  background-image: linear-gradient(0deg, #0093e9 0%, #00ffd2 100%);
+  margin: 0;
+}
+.parent-header {
+  font-weight: bolder;
+  font-size: 320%;
+  margin: 15% 0 0 16%;
+}
+.parent-mainHeader {
+  text-align:center;
+  width:25%;
+  margin: 0 auto;
+  font-size:150%;
+  letter-spacing:1px;
+}
+.parent-headerContent {
+  margin-top:0;
+}
+.title {
+  margin:0 0 2% 0;
+  text-align:center;
+}
+.nav {
+  margin: 8% 0 0 0;
+}
+.mainContainer {
+  width: 1600px;
+  border-right-color: pink;
+}
+.navBar {
+  overflow: auto;
+  white-space: nowrap;
+}
+.navBar .childrenCards {
+  display: inline-block;
+}
+.card {
+  width: 330px;
+  height: 480px;
+  border-radius: 25px;
+  background: #15ddc9;
+  float: left;
+  margin: 5px;
+  transition:0.6s;
+  position: relative;
+}
+.name {
+  font-size: 45px;
+}
+.name,
+.saldo {
+  padding-left: 10px;
+  font-weight: bolder;
+  margin: 15px;
+}
+
+.card:hover {
+  transition: 0.6s;
+  transform: scale(1.02);
+  cursor: pointer;
+  background: #FEFF86;
+}
+.card:active {
+  transition:0.6s;
+  position: relative;
+  top: 1px;
+  background-color: #fcfc45;
+}
+
+.avatar img,
+.avatar {
+  height: 300px;
+  width: 300px;
+}
+
+.avatar img {
+  border-radius: 20%;
+  object-fit: cover;
+}
+.avatar {
+  background: #edf1d6;
+  padding: 5px;
+  border-radius: 20%;
+  border-radius: 20%;
+  object-fit: cover;
+}
+.photoContainer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+.myButton {
+  background-color: #97deff;
+  border-radius: 28px;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  color: #000000;
+  margin:15% 0 0 8%;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 16px 31px;
+  transition: 0.6s;
+  text-shadow: 0px 1px 0px #000000;
+}
+.myButton:hover {
+  background-color: #24baff;
+  transition: 0.6s;
+  transform: scale(1.01);
+}
+.myButton:active,
+.btn:active {
+  position: relative;
+  top: 1px;
+  background-color: #00a2ff;
+}
+table {
+  width: 100%;
+  height: 80px;
+}
+#secondColumn {
+  text-align: center;
+  width: 50%;
+}
+header {
+  background-color: #19a7ce;
+  width: 100%;
+  height: 8%;
+  text-align:right;
+}
+.bellIcon {
+  background-color: #19a7ce;
+  background-image: url("https://img.icons8.com/ios/256/appointment-reminders--v1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none; 
+  padding: 16px 20px; 
+  margin:2% 2% 0 0;
+  font-size: 16px; 
+  cursor: pointer; 
+  border-radius: 25%;
+  transition: 0.6s;
+}
+.gearIcon {
+  background-color: #19a7ce;
+  background-image: url("https://img.icons8.com/ios/256/engineering.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  padding: 16px 20px;
+  margin:2% 2% 0 0;
+  font-size: 16px; 
+  cursor: pointer; 
+  border-radius: 25%
+}
+.navButton:hover {
+  background-color: #19a7ce;
+}
+.childHistory-container{
+  margin:5% 0 0 0;
+  text-align:center;
+  font-weight:600;
+}
+.payoffButton {
+  background-color: #97deff;
+  border-radius: 28px;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  color: #000000;
+  margin:15% 0 0 30%;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 16px 31px;
+  transition: 0.6s;
+  text-shadow: 0px 1px 0px #000000;
+}
+.payoffButton:hover {
+  background-color: #24baff;
+  transition: 0.6s;
+  transform: scale(1.01);
+}
+.payoffButton:active,
+.btn:active {
+  position: relative;
+  top: 1px;
+  background-color: #00a2ff;
+}
+.paymentButton {
+  background-color: #97deff;
+  border-radius: 28px;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  color: #000000;
+  margin:15% 0 0 30%;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 16px 31px;
+  transition: 0.6s;
+  text-shadow: 0px 1px 0px #000000;
+}
+.paymentButton:hover {
+  background-color: #24baff;
+  transition: 0.6s;
+  transform: scale(1.01);
+}
+.paymentButton:active,
+.btn:active {
+  position: relative;
+  top: 1px;
+  background-color: #00a2ff;
+}
+.amount {
+  margin: 0 0 0 0;
+}
+.amountInfo {
+  margin: 5% 0 0 0;
+}
+.amountTitle {
+  margin: 0 0 1% 0;
 }

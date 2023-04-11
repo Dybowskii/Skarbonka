@@ -4,11 +4,14 @@ import Navbar from "./Components/Navbar";
 import Header from "./Components/Header";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
-
+//Komponenty: widok rodzica/widok skarbonki dziecka
+import ChildView from "./Components/ChildView";
+import ParentView from "./Components/ParentView";
+import { QueryClientProvider, QueryClient } from "react-query";
+const queryClient = new QueryClient();
 function NavigationBar(props) {
   const isLoggedIn = props.isLoggedIn;
   const isLoginVisible = props.isLoginVisible;
-
   if (isLoggedIn) {
     return (
       <div>
@@ -42,12 +45,21 @@ function App() {
   return (
     <div className="container">
       <div className="content">
-        <Navbar
+        <React.StrictMode>
+          <QueryClientProvider client={queryClient}>
+          {/* Widok logowania/rejestracji */}
+            <Navbar
           handleLoginClick={handleLoginClick}
           handleRegisterClick={handleRegisterClick}
           isLoggedIn={isClicked}
         />
         <NavigationBar isLoggedIn={isClicked} isLoginVisible={isLoginVisible} />
+        {/* Widok rodzica */}
+          {/* <ParentView/> */}
+          {/* Widok dziecka */}
+            {/*<ChildView /> */}
+          </QueryClientProvider>
+        </React.StrictMode>
       </div>
     </div>
   );
