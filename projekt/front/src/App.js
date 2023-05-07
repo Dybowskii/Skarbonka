@@ -1,16 +1,66 @@
-import React from "react";
-import axios, * as others from 'axios';
-
-axios.get('http://127.0.0.1:8000/wel/')
-  .then(function (response) {
-    console.log(response);
-  })
-
-
-function App() {
+import "./App.css";
+import React, { useState } from "react";
+import Navbar from "./Components/Navbar";
+import Header from "./Components/Header";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+//Komponenty: widok rodzica/widok skarbonki dziecka
+import ChildView from "./Components/ChildView";
+import ParentView from "./Components/ParentView";
+import { QueryClientProvider, QueryClient } from "react-query";
+const queryClient = new QueryClient();
+function NavigationBar(props) {
+  const isLoggedIn = props.isLoggedIn;
+  const isLoginVisible = props.isLoginVisible;
+  if (isLoggedIn) {
+    return (
+      <div>
+        <Header header="Logowanie" />
+        {isLoginVisible && <Login />}
+      </div>
+    );
+  }
   return (
     <div>
-      hej
+      <Header header="Rejestracja" />
+      {!isLoginVisible && <Register />}
+    </div>
+  );
+}
+
+function App() {
+  const [isClicked, setIsClicked] = useState(true);
+  const [isLoginVisible, setIsLoginVisible] = useState(true);
+
+  const handleLoginClick = () => {
+    setIsClicked(true);
+    setIsLoginVisible(true);
+  };
+
+  const handleRegisterClick = () => {
+    setIsClicked(false);
+    setIsLoginVisible(false);
+  };
+
+  return (
+    <div className="container">
+      <div className="content">
+        <React.StrictMode>
+          <QueryClientProvider client={queryClient}>
+          {/* Widok logowania/rejestracji */}
+            <Navbar
+          handleLoginClick={handleLoginClick}
+          handleRegisterClick={handleRegisterClick}
+          isLoggedIn={isClicked}
+        />
+        <NavigationBar isLoggedIn={isClicked} isLoginVisible={isLoginVisible} />
+        {/* Widok rodzica */}
+          {/* <ParentView/> */}
+          {/* Widok dziecka */}
+            {/*<ChildView /> */}
+          </QueryClientProvider>
+        </React.StrictMode>
+      </div>
     </div>
   );
 }
