@@ -1,8 +1,13 @@
 from rest_framework import serializers
 from .models import Skarbonka
 
-class SkarbonkaSerializer(serializers.ModelSerializer):
-    add = serializers.IntegerField(write_only=True, required=False)
+class SkarbonkaCreateSerializer(serializers.ModelSerializer):
+   
     class Meta:
         model = Skarbonka
-        fields = ('pk','name','amount','parent','add')
+        fields = ('name','amount','parent')
+class SkarbonkaUpdateSerializer(serializers.ModelSerializer):
+    add = serializers.DecimalField(max_digits=6, decimal_places=2, required=False)
+    class Meta:
+        model = Skarbonka
+        fields = ('name','amount','parent','add')

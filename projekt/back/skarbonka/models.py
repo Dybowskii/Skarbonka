@@ -7,3 +7,5 @@ class Skarbonka(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    def is_parent(self,user):
+        return user==self.parent

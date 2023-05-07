@@ -9,7 +9,10 @@ urlpatterns = [
     path('login/', LoginView.as_view()),
     path('logout/', LogoutView.as_view()),
     path('change/', PasswordChangeView.as_view()),
-    path('skarbonka/', views.skarbonki.as_view())
+    path('skarbonka/', views.skarbonkiCreate.as_view()),
+    path('my/', views.ParentSkarbonki.as_view()),
+    path('my/<int:pk>', views.ParentSingleSkarbonka.as_view()),
+
     
 
 ]
