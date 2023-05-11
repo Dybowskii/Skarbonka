@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'dj_rest_auth',
     'dj_rest_auth.registration',
-    'rest_auth'
+    'rest_auth',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -162,9 +163,12 @@ AUTHENTICATION_BACKENDS = [
 ]
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'Optional'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-
+AUTH_USER_MODEL = "users.User"
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer'
+}
 ACCOUNT_LOGOUT_ON_GET = True
 LOGIN_URL = 'http://localhost:8000/users/login'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
