@@ -13,3 +13,5 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+    def isParent(self):
+        return self.user_type

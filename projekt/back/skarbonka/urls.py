@@ -9,6 +9,8 @@ urlpatterns = [
     path('skarbonka/', views.skarbonkiCreate.as_view()),
     path('my/', views.ParentSkarbonki.as_view()),
     path('my/<int:pk>', views.ParentSingleSkarbonka.as_view()),
+    path('myy/', views.Skarbonek.as_view()),
+
 
     
 
