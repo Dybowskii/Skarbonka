@@ -1,3 +1,4 @@
+from typing import Any, Dict, Tuple
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -12,3 +13,9 @@ class Skarbonka(models.Model):
         return self.name
     def is_parent(self,user):
         return user==self.parent
+    def is_child(self,user):
+        return user==self.child
+    def delete(self):
+        if self.child:
+            self.child.delete()
+        super(Skarbonka, self).delete()

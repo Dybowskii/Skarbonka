@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'skarbonka',
     'corsheaders',
     'django.contrib.sites',
+    'allauth.socialaccount',
     'allauth',
     'allauth.account',
     'dj_rest_auth',
@@ -145,11 +146,18 @@ CORS_ALLOW_CREDENTIALS = True
 # dodane
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
+      
         'rest_framework.authentication.TokenAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     )
+
 }
 
+REST_AUTH = {
+        'USE_JWT': True,
+        'JWT_AUTH_COOKIE': 'my-app-auth',
+        'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
+}
 REST_AUTH_PASSWORD_CHANGE = {
     'OLD_PASSWORD_FIELD_ENABLED': True,
 }

@@ -9,3 +9,11 @@ class IsParent(permissions.BasePermission):
     def has_permission(self, request, view):
         user = request.user
         return user.is_authenticated and user.user_type == 'p'
+
+class IsChild(permissions.BasePermission):
+    def has_permission(self, request, view):
+        user = request.user
+        return user.is_authenticated and user.user_type == 'c'
+class IsSkarbonkaChild(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.is_child(request.user)
