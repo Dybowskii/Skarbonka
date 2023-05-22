@@ -21,6 +21,6 @@ from skarbonka.views import *
   
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('skarbonka/',include('skarbonka.urls')),
+    path('',include('skarbonka.urls')),
     path('users/',include('users.urls'))
 ]

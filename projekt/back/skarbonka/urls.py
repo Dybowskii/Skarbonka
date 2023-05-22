@@ -7,12 +7,12 @@ from . import views
 urlpatterns = [
 
     path('all/', views.skarbonkiCreate.as_view()), #wyszstkie skarbonki
-    path('my/', views.ParentSkarbonki.as_view()), #wszystkie skarbonki danego rodzica
-    path('my/<int:pk>', views.ParentSkarbonki.as_view()),#dokładny widok skarbonki
-    path('add_money/<int:pk>', views.ParentSingleSkarbonka.as_view()), #wplacanie pieniedzy
-    path('add_skarbonka/', views.Skarbonek.as_view()),#dodawanie skarbonek
-    path('child/my', views.ChildSkarbonki.as_view()),#skarbonki danego dziecka
-    path('child/my/<int:pk>', views.ChildWithDraw.as_view()),#skarbonki danego dziecka
+    path('parent/', views.ParentSkarbonki.as_view()), #wszystkie skarbonki danego rodzica
+    path('parent/<int:pk>', views.ParentSkarbonki.as_view()),#dokładny widok skarbonki
+    path('parent/<int:pk>/add', views.ParentSingleSkarbonka.as_view()), #wplacanie pieniedzy
+    path('parent/new', views.Skarbonek.as_view()),#dodawanie skarbonek
+    path('child/', views.ChildSkarbonki.as_view()),#skarbonki danego dziecka
+    path('child/<int:pk>', views.ChildWithDraw.as_view()),#skarbonki danego dziecka
 
     
 

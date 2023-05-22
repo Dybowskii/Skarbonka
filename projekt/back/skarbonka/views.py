@@ -28,12 +28,13 @@ class ParentSkarbonki(ListAPIView):
         return Skarbonka.objects.filter(parent=user)
 class ParentSingleSkarbonka(RetrieveUpdateDestroyAPIView):#Wikod wplat do skarbonki
     queryset = Skarbonka.objects.all()
+    permission_classes = [permissions.IsAuthenticated, IsSkarbonkaParent]
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return SkarbonkaRead
         else:
             return SkarbonkaAddMoney
-    permission_classes = [permissions.IsAuthenticated, IsSkarbonkaParent]
+    
     def put (self,request,*args,**kwargs):
         Skarbonka = self.get_object()
         add = request.data.get('add',10)
