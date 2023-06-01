@@ -1,6 +1,8 @@
 from django.urls import path
 from dj_rest_auth.registration.views import RegisterView
 from dj_rest_auth.views import LoginView, LogoutView, PasswordChangeView
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
@@ -15,8 +17,6 @@ urlpatterns = [
     path('child/<int:pk>', views.ChildWithDraw.as_view()),#skarbonki danego dziecka
 
     
-
-
     
 
-]
+]+ static(r'^$/images/', document_root = settings.MEDIA_URL)

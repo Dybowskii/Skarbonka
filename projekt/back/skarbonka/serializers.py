@@ -8,7 +8,7 @@ class SkarbonkaCreateSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Skarbonka
-        fields = ('pk','name','amount','parent','child')
+        fields = ('pk','name','amount','parent','child','photo')
 class SkarbonkaRead(serializers.ModelSerializer):
     add = serializers.DecimalField(max_digits=6, decimal_places=2, required=False)
     class Meta:
@@ -40,7 +40,7 @@ class Skarbonka2Serializer(serializers.ModelSerializer):
     parent = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Skarbonka
-        fields = ('name','amount', 'parent', 'child')
+        fields = ('name','amount','photo', 'parent', 'child')
     def create(self, validated_data):
         child_data=validated_data.pop('child')
         child = ChildUserSerializer().create(child_data)
