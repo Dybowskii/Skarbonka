@@ -1,0 +1,42 @@
+import ChildrenBar from "./ChildrenBar";
+import { useState, useEffect } from 'react';
+import Nav from "./Nav";
+import "../App.css"
+import userIcon from "../Images/user-icon.png"
+import axios from "axios";
+import { setAuthToken } from "./setAuthToken";
+import NewChildrenBar from "./NewChilderBar";
+
+    
+
+function ParentView()
+{
+    const [name, setName] = useState('');
+
+    async function getName() {
+        axios.get("http://127.0.0.1:8000/users/")
+        .then(res => {
+            let data = res.data;
+            console.log(data[0].username)
+            setName(data[0].username)
+        }).catch(err => {
+            setName("Wystapil blad")
+        console.log(err);
+        });
+      }
+      getName();
+
+    return <div className="container">
+        <div className="content-parent">
+        {/* <Nav /> */}
+        <div className="parent-header-container">
+        <h1 className="parent-header-name"><img className = "parent-icon"src={userIcon} alt="child-icon"></img>{name}</h1>
+        </div>
+        <div className="parent-content">
+        <NewChildrenBar />
+        </div>
+        </div>
+    </div>
+}
+
+export default ParentView;

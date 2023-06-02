@@ -26,6 +26,13 @@ class ParentSkarbonki(ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return Skarbonka.objects.filter(parent=user)
+class ParentSkarbonki2(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated,IsParent]
+    serializer_class = SkarbonkaCreateSerializer
+    def get_queryset(self):
+        user = self.request.user
+        return Skarbonka.objects.filter(parent=user)
+    
 class ParentSingleSkarbonka(RetrieveUpdateDestroyAPIView):#Wikod wplat do skarbonki
     queryset = Skarbonka.objects.all()
     permission_classes = [permissions.IsAuthenticated, IsSkarbonkaParent]
@@ -37,11 +44,9 @@ class ParentSingleSkarbonka(RetrieveUpdateDestroyAPIView):#Wikod wplat do skarbo
     
     def put (self,request,*args,**kwargs):
         Skarbonka = self.get_object()
-        add = request.data.get('add',10)
+        add = request.data.get('add',0)
         if add == '':
             raise ValidationError('No value add')
-        if float(add)+Skarbonka.amount > 999:
-            raise ValidationError('Price cannot be increased beyond 999 zł.')
         if float(add) < 0:
             raise ValidationError('no option to reduce the amount of money')
         
@@ -75,7 +80,7 @@ class ChildWithDraw(RetrieveUpdateAPIView):#Wikod wplat do skarbonki
     permission_classes = [permissions.IsAuthenticated, IsSkarbonkaChild]
     def put (self,request,*args,**kwargs):
         Skarbonka = self.get_object()
-        add = request.data.get('add',10)
+        add = request.data.get('add',0)
         if add == '':
             raise ValidationError('No value add')
         if Skarbonka.amount - float(add) < 0:
