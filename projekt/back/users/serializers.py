@@ -20,6 +20,10 @@ class CustomRegisterSerializer(RegisterSerializer):
             'user_type': self.validated_data.get('user_type'),
             
         }
+class UserNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=User
+        fields=('pk','username')
     
 
     # override save method of RegisterSerializer

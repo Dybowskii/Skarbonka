@@ -1,8 +1,29 @@
 import axios from "axios";
 import { useState } from "react";
+import { Formik, Form, Field } from 'formik';
 
 function CreateChild()
 {
+  <Formik
+       initialValues={{
+        name: "",
+        amount: 0,
+        photo: "",
+        child: {
+            username: "",
+            email: "",
+            password: ""
+        }
+       }}
+       onSubmit={values => {
+         // same shape as initial values
+
+         console.log(values);
+       }}
+     ></Formik>
+
+
+       
     const initialValue = {
         name: "",
         amount: 0,
@@ -14,10 +35,32 @@ function CreateChild()
         }
       }
     const [data, setData] = useState( initialValue );
-    
-    const handleChange = (event) => {
-        setData({ add: event.target.value });
-      };
+
+  
+  const [message, setMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const nestedName = name.split(".");
+
+    if (nestedName.length > 1) {
+      setData((prevState) => ({
+        ...prevState,
+        [nestedName[0]]: {
+          ...prevState[nestedName[0]],
+          [nestedName[1]]: value
+        }
+      }));
+    } else {
+      setData((prevState) => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
+  };
+    // const handleChange = (event) => {
+    //     setData({ add: event.target.value });
+    //   };
 
 
       const submit = async e => {
@@ -37,7 +80,9 @@ function CreateChild()
 
           await axios.post('http://127.0.0.1:8000/parent/new', user).then(res => {
             console.log(res)
-          }).catch((error) => 
+            console.log(res.status)
+          })
+          .catch((error) => 
           {
             console.log(error)
           })
@@ -45,7 +90,8 @@ function CreateChild()
 
 
     return <div>
-    <form>
+    <form onSubmit={submit}>
+    <pre>{JSON.stringify(data, undefined, 2)}</pre>
     <label htmlFor="name">
       Nazwa skarbonki</label><br/>
           <input
@@ -54,6 +100,7 @@ function CreateChild()
             placeholder="Nazwa skarbonki"
             value={data.name}
             onChange={handleChange}
+            
           /><br/>
     <label htmlFor="amount">
       Ilość środków</label><br/>
@@ -78,7 +125,7 @@ function CreateChild()
           <input
             type="text"
             name="username"
-            value={data.username}
+            value={data.child.username}
             onChange={handleChange}
           /><br/>
     <label htmlFor="email">
@@ -86,7 +133,7 @@ function CreateChild()
           <input
             type="email"
             name="email"
-            value={data.email}
+            value={data.child.email}
             onChange={handleChange}
           /><br/>
         <label htmlFor="password">
@@ -94,12 +141,10 @@ function CreateChild()
           <input
             type="password"
             name="password"
-            value={data.password}
+            value={data.child.password}
             onChange={handleChange}
           /><br/>
           <button type="submit">Stwórz nową skarbonke</button>
-       
-
 
     </form>
     </div>

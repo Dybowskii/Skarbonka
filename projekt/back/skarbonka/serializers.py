@@ -37,6 +37,7 @@ class ChildUserSerializer(serializers.ModelSerializer):
         return user
 class Skarbonka2Serializer(serializers.ModelSerializer):
     child = ChildUserSerializer(write_only = True)
+    
     parent = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Skarbonka

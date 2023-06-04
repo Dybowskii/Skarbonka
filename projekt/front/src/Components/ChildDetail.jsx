@@ -56,7 +56,7 @@ function ChildDetail()
                 setMessage("Wystapił błąd.")
         })
     }
-
+    
 
     return <div>
         <div className="container">
@@ -83,6 +83,7 @@ function ChildDetail()
                         <input 
                             className="subtractMoneyInput"  placeholder="wplac" 
                             value={money.add} 
+                            step="any"
                             onChange={handleChange} />
 
                         <br/>

@@ -9,6 +9,8 @@ import Details from "./Details";
 import { setAuthToken } from "./setAuthToken";
 import ChildDetail from "./ChildDetail";
 import CreateChild from "./CreateChild";
+import MainPage from "./MainPage";
+import TestCreate from "./TestCreate";
 const Nawigacja=() => {
     const auth = localStorage.getItem('token')
     setAuthToken(auth)
@@ -63,11 +65,12 @@ const Nawigacja=() => {
           </ul>
         </header>
         <Routes>
-        {accountType=='p'? <Route path="/" element={<ParentView />}/>: <Route path="/" element={<ChildView />}/>}
+        {auth ? <>{accountType=='p'? <Route path="/" element={<ParentView />}/>: <Route path="/" element={<ChildView />}/>}</>: <Route path="/" element={<MainPage />}/>}
+        
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="detail/:childID" element={<ChildDetail />} />
-          <Route path="new" element={<CreateChild />} />
+          <Route path="new" element={<TestCreate />} />
         </Routes>
       </div>
     </div>
