@@ -13,7 +13,6 @@ function ChildDetail()
     const [money, setMoney] = useState( initialValue );
     const params = useParams();
     const [ child, setChild ] = useState('')
-    console.log(params.childID)
 
 
 
@@ -21,7 +20,6 @@ function ChildDetail()
         axios.get(('http://127.0.0.1:8000/parent/' + params.childID))
         .then(res => {
             setChild(res.data);
-            console.log(res.data)
         })
         .catch(error => {
             console.error(error);
@@ -64,7 +62,7 @@ function ChildDetail()
                 {message ? <p>{message}</p> : null}
                 <table>
                 <tr>
-                    <td><h1 className="title">Skarbonka dziecka: {child.name}</h1>
+                    <td><h1 className="title">Skarbonka {child.name}</h1>
                     </td>
                     <td id="secondColumn"><Amount amount={child.amount}/> </td>
                     </tr>
@@ -73,9 +71,6 @@ function ChildDetail()
                         <br/>
                         <p>Wypłacić środki może tylko właścicel skarbonki</p>
                         <button className="payoffButton" disabled>Wypłać</button>
-                        
-
-
                         </td>
                         <td className="buttons">
                         <br/>

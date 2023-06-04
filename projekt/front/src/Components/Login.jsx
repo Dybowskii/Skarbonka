@@ -25,7 +25,6 @@ const Login = () => {
 
   const submit = async e => {
     e.preventDefault();
-
     const user = {
         username: "",
         email: data.email,
@@ -36,7 +35,6 @@ const Login = () => {
       const token = response.data.access;
       localStorage.setItem("token", token);
       setAuthToken(token);
-      setMessage("Zalogowales się")
       navigate('/');
 
     }).catch((error) => 
@@ -44,17 +42,7 @@ const Login = () => {
       console.log(error)
       setMessage("Wystąpił błąd");
     })
-      
-
 }
-
-
-  function dzialaj()
-  {
-    axios.get("http://127.0.0.1:8000/skarbonka/my/").then(function (response) {
-      console.log(response);
-    });
-  }
   function logout()
   {
     axios.get("http://127.0.0.1:8000/skarbonka/my/").then(function (response) {
@@ -68,17 +56,7 @@ const Login = () => {
     <div>
     <h1>Zaloguj się</h1>
     <div className="message">{message ? <p>{message}</p> : null}</div>
-    <form onSubmit={submit} className="registerForm-container">
-    {/* <label htmlFor="username">
-      username</label>
-          <input
-            type="text"
-            name="username"
-            placeholder="username"
-            value={data.username}
-            onChange={handleChange}
-          /> */}
-          
+    <form onSubmit={submit} className="registerForm-container">         
       <label htmlFor="email">email</label>
       <input 
           type="email" 
@@ -87,7 +65,6 @@ const Login = () => {
           value={data.email}
           onChange={handleChange}
         />
-
       <label htmlFor="password1">hasło</label>
       <input 
             type="password"
@@ -95,24 +72,11 @@ const Login = () => {
             placeholder="********"
             value={data.password}
             onChange={handleChange} />
-
-
       <button type="submit" className="register-button">
         Zaloguj się
       </button>
-      <button type="submit" className="passwordReset-button">
-        Nie pamiętam hasła
-      </button>
-      
     </form>
-    <div>
-      
-    </div>
-    <button type="submit" onClick={dzialaj}>
-        dawaj
-      </button>
-      
-    </div>
+    <div></div></div>
     
   );
 };

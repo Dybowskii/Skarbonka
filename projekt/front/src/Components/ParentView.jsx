@@ -1,6 +1,4 @@
-import ChildrenBar from "./ChildrenBar";
 import { useState, useEffect } from 'react';
-import Nav from "./Nav";
 import "../App.css"
 import userIcon from "../Images/user-icon.png"
 import axios from "axios";
@@ -17,7 +15,6 @@ function ParentView()
         axios.get("http://127.0.0.1:8000/users/")
         .then(res => {
             let data = res.data;
-            console.log(data[0].username)
             setName(data[0].username)
         }).catch(err => {
             setName("Wystapil blad")

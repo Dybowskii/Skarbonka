@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import axios from "axios";
 
@@ -14,8 +14,6 @@ function TestCreate() {
       password: ""
     }
   };
-  const fileRef = useRef(null);
-  
 
    const handleSubmit = (values) => {
     setTekst(values)
@@ -38,7 +36,7 @@ function TestCreate() {
       <Form>
         <Field type="text" name="name" placeholder="Name" /><br/><br/>
         <Field type="number" name="amount" placeholder="Amount" /><br/><br/>
-        <FileUpload name="files" fileRef={fileRef} />
+        <Field type="file" name="photo" placeholder="Photo" /><br/><br/>
         <Field type="text" name="child.username" placeholder="Child Username" /><br/><br/>
         <Field type="email" name="child.email" placeholder="Child Email" /><br/><br/>
         <Field type="password" name="child.password" placeholder="Child Password" /><br/><br/>

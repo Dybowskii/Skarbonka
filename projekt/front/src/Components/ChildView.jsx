@@ -1,7 +1,4 @@
-
-import Nav from "./Nav";
 import Amount from "./Amount";
-import { useLocation, Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -13,10 +10,21 @@ function ChildView()
       }
     const [money, setMoney] = useState( initialValue );
     const [ data, setData ] = useState('')
+    const [data2, setData2] = useState('')
     useEffect(() => {
         axios.get(('http://127.0.0.1:8000/child/'))
         .then(res => {
             setData(res.data[0]);
+            console.log(res.data[0])
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }, []);
+    useEffect(() => {
+        axios.get(('http://127.0.0.1:8000/users/'))
+        .then(res => {
+            setData2(res.data[0]);
             console.log(res.data[0])
         })
         .catch(error => {
@@ -56,7 +64,7 @@ function ChildView()
                 {message ? <p>{message}</p> : null}
                 <table>
                 <tr>
-                    <td><h1 className="title">Witaj, {data.name}</h1>
+                    <td><h1 className="title">Witaj, {data2.username}</h1>
                     </td>
                     <td id="secondColumn"><Amount amount={data.amount}/> </td>
                     </tr>
