@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'skarbonka',
     'corsheaders',
     'django.contrib.sites',
+    'allauth.socialaccount',
     'allauth',
     'allauth.account',
     'dj_rest_auth',
@@ -145,11 +148,18 @@ CORS_ALLOW_CREDENTIALS = True
 # dodane
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
+      
         'rest_framework.authentication.TokenAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     )
+
 }
 
+REST_AUTH = {
+        'USE_JWT': True,
+        'JWT_AUTH_COOKIE': 'my-app-auth',
+        'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
+}
 REST_AUTH_PASSWORD_CHANGE = {
     'OLD_PASSWORD_FIELD_ENABLED': True,
 }
@@ -178,3 +188,6 @@ EMAIL_HOST_PASSWORD = 'xvlkpskinaaudbck'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(hours=6)}

@@ -1,28 +1,39 @@
-import ChildrenBar from "./ChildrenBar";
-import Nav from "./Nav";
+import { useState, useEffect } from 'react';
 import "../App.css"
 import userIcon from "../Images/user-icon.png"
+import axios from "axios";
+import { setAuthToken } from "./setAuthToken";
+import NewChildrenBar from "./NewChilderBar";
+
+    
 
 function ParentView()
 {
-    // <tr>
-    // <td><h1 className="parent-header">Witaj {"Marek"}</h1> </td>
-    // <td id="secondColumn">
-    // <button className="myButton">Stwórz nową skarbonkę</button> 
-    // </td>
-    // </tr>
+    const [name, setName] = useState('');
+
+    async function getName() {
+        axios.get("http://127.0.0.1:8000/users/")
+        .then(res => {
+            let data = res.data;
+            setName(data[0].username)
+        }).catch(err => {
+            setName("Wystapil blad")
+        console.log(err);
+        });
+      }
+      getName();
+
     return <div className="container">
-    <div className="content-parent">
-    <Nav />
-    <div className="parent-header-container">
-    <span className="parent-header">Witaj użytkowniku!</span> 
-    <h1 className="parent-header-name"><img className = "parent-icon"src={userIcon} alt="child-icon"></img>{"Marek"}</h1>
+        <div className="content-parent">
+        {/* <Nav /> */}
+        <div className="parent-header-container">
+        <h1 className="parent-header-name">Witaj <br/>{name}</h1>
+        </div>
+        <div className="parent-content">
+        <NewChildrenBar />
+        </div>
+        </div>
     </div>
-    <div className="parent-content">
-    <ChildrenBar />
-    </div>
-    </div>
-</div>
 }
 
 export default ParentView;

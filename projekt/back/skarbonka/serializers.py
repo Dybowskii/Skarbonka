@@ -8,12 +8,17 @@ class SkarbonkaCreateSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Skarbonka
-        fields = ('name','amount','parent','child')
-class SkarbonkaUpdateSerializer(serializers.ModelSerializer):
+        fields = ('pk','name','amount','parent','child','photo')
+class SkarbonkaRead(serializers.ModelSerializer):
     add = serializers.DecimalField(max_digits=6, decimal_places=2, required=False)
     class Meta:
         model = Skarbonka
         fields = ('name','amount','parent','add')
+class SkarbonkaAddMoney(serializers.ModelSerializer):
+    add = serializers.DecimalField(max_digits=6, decimal_places=2, required=False)
+    class Meta:
+        model = Skarbonka
+        fields = ('amount','add')
 
 User = get_user_model()
 
@@ -28,10 +33,12 @@ class ChildUserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        user = User.objects.create_user(validated_data['username'], password=validated_data['password'], user_type='c')
+        user = User.objects.create_user(validated_data['username'], email=validated_data['email'],password=validated_data['password'], user_type='c')
         return user
 class Skarbonka2Serializer(serializers.ModelSerializer):
     child = ChildUserSerializer(write_only = True)
+    
+    parent = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Skarbonka
         fields = ('name','amount', 'parent', 'child')
@@ -40,3 +47,12 @@ class Skarbonka2Serializer(serializers.ModelSerializer):
         child = ChildUserSerializer().create(child_data)
         skarbonka = Skarbonka.objects.create(child=child,**validated_data)
         return skarbonka
+class SkarbonkaChildView(serializers.ModelSerializer):
+   
+    class Meta:
+        model = Skarbonka
+        fields = ('pk','name','amount','parent')
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skarbonka
+        fields = ('pk','photo')
