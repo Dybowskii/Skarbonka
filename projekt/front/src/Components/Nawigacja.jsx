@@ -10,6 +10,7 @@ import ChildDetail from "./ChildDetail";
 import MainPage from "./MainPage";
 import TestCreate from "./TestCreate";
 import Settings from "./Settings";
+import Form from "./TestPhoto";
 
 const Nawigacja=() => {
     const auth = localStorage.getItem('token')

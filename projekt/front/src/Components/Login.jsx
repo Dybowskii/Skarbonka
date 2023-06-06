@@ -32,7 +32,7 @@ const Login = () => {
       };
 
     await axios.post('http://127.0.0.1:8000/users/login/', user).then(response => {
-      const token = response.data.access;
+      const token = response.data.access_token;
       localStorage.setItem("token", token);
       setAuthToken(token);
       navigate('/');

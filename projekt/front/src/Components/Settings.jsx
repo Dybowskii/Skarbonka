@@ -6,7 +6,8 @@ const Settings = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
+  const [message1, setMessage1] = useState('');
+  const [message2, setMessage2] = useState('');
   const [index , setIndex] = useState();
 
   const handlePasswordChange = async () => {
@@ -14,13 +15,13 @@ const Settings = () => {
       try {
         const data = { new_password1: newPassword, new_password2: confirmPassword };
         const response = await axios.post('http://127.0.0.1:8000/users/change/', data);
-        setMessage("Udało zmienić się hasło")
+        setMessage1("Udało zmienić się hasło")
       } catch (error) {
         console.error(error);
-        setMessage("Wystąpił błąd. Pamiętaj, że hasło musi mieć conajmniej 8 znaków i nie może być powszechne(np. \"12345678\" lub \"Password\")")
+        setMessage1("Wystąpił błąd. Pamiętaj, że hasło musi mieć conajmniej 8 znaków i nie może być powszechne(np. \"12345678\" lub \"Password\")")
       }
     } else {
-        setMessage('Hasła nie są identyczne.');
+        setMessage1('Hasła nie są identyczne.');
     }
   };
 
@@ -28,10 +29,10 @@ const Settings = () => {
       axios.post('http://127.0.0.1:8000/users/me/username', {
         new_username: name
         }).then(res => {
-            setMessage("Nazwa została zmieniona")
+            setMessage2("Nazwa została zmieniona")
         }).catch((err) => 
         {
-            setMessage("Wystąpil błąd")
+            setMessage2("Wystąpil błąd")
         })
     
   }
@@ -39,7 +40,7 @@ const Settings = () => {
   return (
     <div>
     <h1>Zmiana hasła:</h1>
-    <div className="message">{message ? <p>{message}</p> : null}</div>\
+    <div className="message">{message1 ? <p>{message1}</p> : null}</div>\
     
       <label>
         Nowe hasło:<br/>
@@ -54,6 +55,7 @@ const Settings = () => {
       <button onClick={handlePasswordChange}>Zmień hasło</button>
       <hr></hr>
       <h1>Zmiana nazwy:</h1>
+      <div className="message">{message2 ? <p>{message2}</p> : null}</div>
       <label>
         Nowa nazwa:<br/>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} /><br/>

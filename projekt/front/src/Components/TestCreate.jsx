@@ -3,7 +3,7 @@ import { Formik, Field, Form } from "formik";
 import axios from "axios";
 
 function TestCreate() {
-    const [tekst, setTekst] = useState()
+    const [message, setMessage] = useState('');
   const initialValues = {
     name: "",
     amount: 0,
@@ -16,29 +16,31 @@ function TestCreate() {
   };
 
    const handleSubmit = (values) => {
-    setTekst(values)
-
     axios.post('http://127.0.0.1:8000/parent/new', values).then(res => {
-            console.log(res)
-            console.log(res.status)
+      setMessage("Utworzono skarbonkę")
           })
           .catch((error) => 
           {
+            setMessage("Wystąpił błąd")
             console.log(error)
           })
     console.log(values);
   };
 
   return (
-    <div><pre>{JSON.stringify(tekst, undefined, 2)}</pre>
+    <div>
+    <div className="message">{message ? <p>{message}</p> : null}</div>
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-    
       <Form>
+        Nazwa skarbonki:<br/>
         <Field type="text" name="name" placeholder="Name" /><br/><br/>
+        Środki w skarbonce:<br/>
         <Field type="number" name="amount" placeholder="Amount" /><br/><br/>
-        <Field type="file" name="photo" placeholder="Photo" /><br/><br/>
+        Username dziecka:<br/>
         <Field type="text" name="child.username" placeholder="Child Username" /><br/><br/>
+        Email dziecka:<br/>
         <Field type="email" name="child.email" placeholder="Child Email" /><br/><br/>
+        Hasło dziecka:<br/>
         <Field type="password" name="child.password" placeholder="Child Password" /><br/><br/>
         <button type="submit">Save</button>
       </Form>

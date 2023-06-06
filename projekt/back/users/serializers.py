@@ -45,3 +45,4 @@ class UserTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('pk','user_type')
+

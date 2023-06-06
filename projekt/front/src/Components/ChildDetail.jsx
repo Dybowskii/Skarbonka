@@ -54,12 +54,38 @@ function ChildDetail()
                 setMessage("Wystapił błąd.")
         })
     }
-    
+
+    const sendRequest = (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById('photo');
+        const file = fileInput.files[0];
+
+        const formData = new FormData();
+        formData.append('photo', file);
+
+        axios({
+        method: 'put',
+        url: 'http://127.0.0.1:8000/parent/photo/' + params.childID,
+        data: formData,
+        headers: {'Content-Type': 'multipart/form-data'}
+        })
+        .then(function (response) {
+        setMessage("Zdjęcie zostało zmienione")
+        })
+        .catch(function (error) {
+            setMessage("Wystąpił błąd podczas zmieniania zdjęcia")
+        });
+    }
+  
 
     return <div>
         <div className="container">
                 <div className="content">
-                {message ? <p>{message}</p> : null}
+                <form>
+                <input type="file" id="photo" accept="photo/*"/>
+                <button type="submit" onClick={sendRequest}>Zmień zdjęcie</button>
+                </form>
+                <div className="message">{message ? <p>{message}</p> : null}</div>
                 <table>
                 <tr>
                     <td><h1 className="title">Skarbonka {child.name}</h1>

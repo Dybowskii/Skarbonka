@@ -41,7 +41,7 @@ class Skarbonka2Serializer(serializers.ModelSerializer):
     parent = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Skarbonka
-        fields = ('name','amount','photo', 'parent', 'child')
+        fields = ('name','amount', 'parent', 'child')
     def create(self, validated_data):
         child_data=validated_data.pop('child')
         child = ChildUserSerializer().create(child_data)
@@ -52,3 +52,7 @@ class SkarbonkaChildView(serializers.ModelSerializer):
     class Meta:
         model = Skarbonka
         fields = ('pk','name','amount','parent')
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skarbonka
+        fields = ('pk','photo')

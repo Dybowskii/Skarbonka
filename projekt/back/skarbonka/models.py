@@ -16,7 +16,7 @@ class Skarbonka(models.Model):
     amount = models.FloatField()
     parent = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete=models.CASCADE)
     child = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='child')
-    photo = models.ImageField(upload_to='images/',default="images/arcydzielo2.bmp",null=True)
+    photo = models.ImageField(upload_to='images/',default="images/user.jpg",null=True)
     
 
     def __str__(self) -> str:

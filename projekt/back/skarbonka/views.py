@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Skarbonka
 from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateAPIView,CreateAPIView,RetrieveUpdateDestroyAPIView
-from .serializers import SkarbonkaCreateSerializer,SkarbonkaAddMoney,Skarbonka2Serializer,SkarbonkaRead,SkarbonkaChildView
+from .serializers import SkarbonkaCreateSerializer,SkarbonkaAddMoney,Skarbonka2Serializer,SkarbonkaRead,SkarbonkaChildView,PhotoSerializer
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework import status
@@ -9,6 +9,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import permissions
 from .permissions import IsSkarbonkaParent,IsParent,IsChild,IsSkarbonkaChild
 from users.models import User
+from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser,FormParser
 
 class skarbonkiCreate(ListCreateAPIView):#wyświetlanie wszystkich skarbonek,dodawanie nowych
     permission_classes = [IsAuthenticated,IsParent]
@@ -92,4 +94,12 @@ class ChildWithDraw(RetrieveUpdateAPIView):#Wikod wplat do skarbonki
         Skarbonka.save()
         serializer = self.get_serializer(Skarbonka)
         return Response(serializer.data)
+
+
+class changePhoto(RetrieveUpdateAPIView):
+    queryset = Skarbonka.objects.all()
+    serializer_class = PhotoSerializer
+    parser_classes = [MultiPartParser,FormParser]
+    
+
     
